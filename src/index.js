@@ -1,34 +1,14 @@
- function toReadable (number) {
-    const firstArr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    const secondArr = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    const thirdArr = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+module.exports = function toReadable (number) {
+    let arr1 = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    let arr2 = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-    let result = number;
+    if (number < 20)
+        return arr1[number];
 
-    if (result.length === 1) {
-        return firstArr[result];
+    let x = number % 10;
 
-    } else if (result.length === 2) {
-        if (result > 10 && result < 20) {
-            return secondArr[result[1]];
-        } else if (result[1] == 0) {
-            return thirdArr[result[0]];
-        } else {
-            return thirdArr[result[0]] + ' ' + firstArr[result[1]];
-        }
-        
-    } else if (result.length === 3) {
-        if (result[1] == 0 && result[2] == 0) {
-            return firstArr[result[0]] + ' hundred';
-        } else if (result[1] == 0 && result[2] != 0) {
-            return firstArr[result[0]] + ' hundred ' + firstArr[result[2]];     
-        } else if (result[1] != 0 && result[2] == 0) {
-            return firstArr[result[0]] + ' hundred ' + thirdArr[result[1]];        
-        } else if (result[1] == 1) {
-            return firstArr[result[0]] + ' hundred ' + secondArr[result[2]];
-        }  else if (result[1] > 1) {
-            return firstArr[result[0]] + ' hundred ' + thirdArr[result[1]] + ' ' + firstArr[result[2]];
-        }
-    }
+    if (number < 100)
+        return arr2[Math.floor(number / 10) - 2] + (x ? " " + arr1[x] : "");
+    else if (number < 1000)
+        return arr1[Math.floor(number / 100)] + " hundred" + (number % 100 == 0 ? "" : " " + toReadable(number % 100));
 }
-console.log(toReadable(7))
