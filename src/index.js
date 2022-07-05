@@ -1,9 +1,9 @@
-module.exports = function toReadable (number) {
+ function toReadable (number) {
     const firstArr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     const secondArr = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
     const thirdArr = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-    let result = resulting(number);
+    let result = number;
 
     if (result.length === 1) {
         return firstArr[result];
@@ -31,3 +31,4 @@ module.exports = function toReadable (number) {
         }
     }
 }
+console.log(toReadable(7))
